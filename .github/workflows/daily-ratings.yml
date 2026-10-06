@@ -1,0 +1,37 @@
+name: Daily ratings refresh
+
+on:
+  schedule:
+    # 11:17 UTC = 6:17 AM Central (5:17 AM in winter). Off the hour on purpose,
+    # since GitHub delays jobs scheduled exactly on the hour.
+    - cron: "17 11 * * *"
+  workflow_dispatch: {}   # adds a "Run workflow" button for a manual refresh
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read ratings from the booking site
+        run: python fetch_ratings.py
+
+      - name: Save if anything changed
+        run: |
+          git config user.name  "ratings-bot"
+          git config user.email "ratings-bot@users.noreply.github.com"
+          git add ratings.json
+          if git diff --cached --quiet; then
+            echo "No change today."
+          else
+            # Only the date changed? Still commit, so the site shows it checked today.
+            git commit -m "Daily ratings refresh"
+            git push
+          fi
