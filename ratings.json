@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-20T15:40:00Z",
-  "total_reviews": 202,
+  "updated": "2026-10-21T15:58:15Z",
+  "total_reviews": 204,
   "average_rating": 4.99,
   "homes": {
     "lake-hamilton": {
       "name": "Breakaway on Lake Hamilton",
       "rating": 5.0,
-      "count": 62,
+      "count": 63,
       "url": "https://book.breakawaystays.com/breakaway-on-lake-hamilton-kayakshot-tubfirepitswings-orp5b742d1x"
     },
     "hot-springs": {
@@ -18,7 +18,7 @@
     "table-rock": {
       "name": "Breakaway at Table Rock",
       "rating": 5.0,
-      "count": 49,
+      "count": 50,
       "url": "https://book.breakawaystays.com/breakaway-at-table-rock-orp5b6e559x"
     }
   }
