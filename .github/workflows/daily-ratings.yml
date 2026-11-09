@@ -1,24 +1,41 @@
-name: Daily ratings refresh
+name: Ratings refresh
 
 on:
   schedule:
-    # 11:17 UTC = 6:17 AM Central (5:17 AM in winter). Off the hour on purpose,
-    # since GitHub delays jobs scheduled exactly on the hour.
-    - cron: "17 11 * * *"
+    # Every six hours, off the hour. GitHub may delay scheduled runs.
+    - cron: "17 */6 * * *"
   workflow_dispatch: {}   # adds a "Run workflow" button for a manual refresh
+  push:
+    branches: [main]
+    paths:
+      - fetch_ratings.py
+      - ratings-live.js
+      - test_ratings.py
+      - test-ratings-live.cjs
+      - .github/workflows/daily-ratings.yml
 
 permissions:
   contents: write
 
+concurrency:
+  group: ratings-refresh
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Validate parser, freshness and browser feed handling
+        run: |
+          python -m unittest -q test_ratings.py
+          node --test test-ratings-live.cjs
 
       - name: Read ratings from the booking site
         run: python fetch_ratings.py
@@ -29,9 +46,9 @@ jobs:
           git config user.email "ratings-bot@users.noreply.github.com"
           git add ratings.json
           if git diff --cached --quiet; then
-            echo "No change today."
+            echo "No change."
           else
-            # Only the date changed? Still commit, so the site shows it checked today.
-            git commit -m "Daily ratings refresh"
+            # The scraper advances the date only when all three homes verify.
+            git commit -m "Refresh verified guest review totals"
             git push
           fi
