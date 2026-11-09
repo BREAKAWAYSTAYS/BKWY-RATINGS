@@ -21,8 +21,8 @@ down to two decimal places.
 
 ## Website connection
 
-The Market My STR homepage loads `ratings-live.js` from this repository's
-GitHub Pages site. The script reads `ratings.json` directly from the public
+The Market My STR homepage includes the tested `ratings-live.js` source inline
+in its site Head tracking code. The script reads `ratings.json` directly from the public
 `main` branch, avoiding a dependency on Pages rebuilding for each bot commit.
 It refreshes on each visit, every five minutes while visible, and when a tab is
 reopened. Network failures retain the verified fallback and retry after 30
@@ -46,11 +46,10 @@ become **last verified** if the source is over 48 hours old. The script also
 keeps the three matching property JSON-LD aggregate ratings in sync.
 Airbnb awards such as Guest Favorite and Top 5% are separate from these totals.
 
-Add this once in the hub's site Head tracking code, preserving existing code:
-
-```html
-<script defer src="https://breakawaystays.github.io/BKWY-RATINGS/ratings-live.js?v=20261109-1"></script>
-```
+Paste the contents of `ratings-live.js` inside one `<script>` block at the end
+of the hub's site Head tracking code, preserving existing code. This keeps the
+small reader independent of external script hosting; review data still comes
+from GitHub automatically. Do not add a second copy when redeploying.
 
 Public JSON mirror: https://breakawaystays.github.io/BKWY-RATINGS/ratings.json
 
