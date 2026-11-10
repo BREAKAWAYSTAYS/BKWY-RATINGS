@@ -2,7 +2,7 @@
   "schema_version": 2,
   "source": "OwnerRez public booking-page guest reviews",
   "all_verified": true,
-  "updated": "2026-11-10T07:13:48Z",
+  "updated": "2026-11-10T19:42:22Z",
   "total_reviews": 210,
   "average_rating": 4.99,
   "homes": {
@@ -11,21 +11,21 @@
       "rating": 5.0,
       "count": 65,
       "url": "https://book.breakawaystays.com/breakaway-on-lake-hamilton-kayakshot-tubfirepitswings-orp5b742d1x",
-      "verified_at": "2026-11-10T07:13:48Z"
+      "verified_at": "2026-11-10T19:42:22Z"
     },
     "hot-springs": {
       "name": "Hot Springs Breakaway",
       "rating": 4.99,
       "count": 93,
       "url": "https://book.breakawaystays.com/hot-springs-breakaway-orp5b71b48x",
-      "verified_at": "2026-11-10T07:13:48Z"
+      "verified_at": "2026-11-10T19:42:22Z"
     },
     "table-rock": {
       "name": "Breakaway at Table Rock",
       "rating": 5.0,
       "count": 52,
       "url": "https://book.breakawaystays.com/breakaway-at-table-rock-orp5b6e559x",
-      "verified_at": "2026-11-10T07:13:48Z"
+      "verified_at": "2026-11-10T19:42:22Z"
     }
   }
 }
